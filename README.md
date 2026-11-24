@@ -1,5 +1,7 @@
 # Horas 932 — cálculo conectado
 
+[Visitar la página publicada](https://horas932-3rxpt5kn.manus.space)
+
 La aplicación consulta un solo horario y calendario compartidos para el grupo 932. La selección del profesor, la fecha y las suspensiones emergentes se procesan en la página; las respuestas de cálculo no se guardan.
 
 ## Stack
