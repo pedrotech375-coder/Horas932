@@ -1,0 +1,17 @@
+{
+  "name": "horas-932",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Calculadora académica de horas pendientes del grupo 932",
+  "packageManager": "npm@10.9.9",
+  "engines": {
+    "node": ">=22 <23"
+  },
+  "scripts": {
+    "build": "rm -rf dist && mkdir -p dist && cp -R public/. dist/",
+    "start": ".venv/bin/python -m uvicorn main:app --host 0.0.0.0 --port ${PORT:-3000}",
+    "dev": ".venv/bin/python -m uvicorn main:app --host 0.0.0.0 --port ${PORT:-3000} --reload",
+    "db:migrate": ".venv/bin/python -m db.migrate",
+    "check": ".venv/bin/python -m compileall -q main.py db tools tests && node --check public/app.js"
+  }
+}

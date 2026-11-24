@@ -1,0 +1,15 @@
+{
+  "include": ["main.py", "db", "tools", "tests"],
+  "extraPaths": ["."],
+  "exclude": [".venv", "dist", "node_modules"],
+  "pythonVersion": "3.12",
+  "typeCheckingMode": "basic",
+  "venvPath": ".",
+  "venv": ".venv",
+  "executionEnvironments": [
+    {
+      "root": ".",
+      "extraPaths": ["."]
+    }
+  ]
+}

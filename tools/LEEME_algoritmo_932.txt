@@ -1,0 +1,27 @@
+ALGORITMO GRUPO 932 — GUÍA RÁPIDA
+
+Archivos del paquete:
+- calcular_horas_932.py: algoritmo interactivo de Python.
+- materias_932.db: archivo local SQLite; contiene el horario de respaldo 2026-2.
+
+Mantén el archivo .py y el archivo .db juntos en la misma carpeta. Requiere Python 3; no instala librerías adicionales.
+
+En Windows, abre una terminal en esa carpeta y ejecuta:
+  py calcular_horas_932.py
+
+También puedes probar:
+  python calcular_horas_932.py
+
+MySQL es la base oficial remota administrada para el sitio; no es el archivo `materias_932.db`. El programa consulta el API público (solo lectura) y, si obtiene datos válidos, actualiza SQLite en una transacción. La sincronización es únicamente MySQL → API → SQLite; este programa nunca escribe en MySQL y no necesita una contraseña de base de datos.
+
+El API FastAPI ya está publicado en https://horas932-3rxpt5kn.manus.space. El endpoint es de solo lectura; el programa descarga desde él los horarios y actualiza el archivo SQLite local, sin usar credenciales MySQL ni enviar datos de regreso.
+
+Si no hay conexión, avisa que SQLite puede estar desactualizada y pregunta si deseas continuar con la última sincronización local. Si nunca se sincronizó, puedes usar el respaldo incluido 2026-2. Si especificas un periodo que no existe en la caché, el programa no usa otro periodo en su lugar.
+
+La sincronización actualiza la tabla `materias_932`, guarda fechas en `calendario_932` y registra el periodo, grupo, hora y respuesta original en `horario_cache`. Puedes abrir el archivo SQLite en R después de sincronizarlo para ver las materias actuales y el calendario.
+
+Selecciona la materia escribiendo su número; ingresa la fecha de hoy en formato dd/mm/aaaa. Para cada suspensión confirmada, selecciona un motivo con su número: 1 Clima, 2 Emergencia personal, 3 Seguridad, 4 Fenómeno natural o 5 Otro (escribir). El motivo “Otro” no puede quedar vacío.
+
+El paquete local está fijado al grupo 932. Opcionalmente, cambia el servidor mediante `HORAS932_API_BASE_URL` o solicita un periodo concreto mediante `HORAS932_PERIODO`. Sin esta última variable, el API devuelve el periodo marcado como activo.
+
+Tus respuestas y las suspensiones que registres durante el cálculo no se guardan en el servidor.

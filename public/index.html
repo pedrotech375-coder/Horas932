@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#081d35">
+  <meta name="description" content="Calcula las horas de clase restantes con el horario y el calendario académico compartidos.">
+  <title>Horas pendientes · Grupo 932</title>
+  <link rel="icon" type="image/svg+xml" href="/mark.svg">
+  <link rel="stylesheet" href="/styles.css?v=20261111-api-data-v1">
+  <script src="/app.js?v=20261111-api-data-v1" defer></script>
+</head>
+<body>
+  <div class="ambient ambient-one" aria-hidden="true"></div>
+  <div class="ambient ambient-two" aria-hidden="true"></div>
+  <main class="page-shell">
+    <section class="overview-layout" aria-label="Resumen del periodo académico">
+      <section class="intro" aria-labelledby="page-title">
+        <div class="eyebrow"><span class="eyebrow-line"></span> PLANIFICADOR DE CLASES <span class="eyebrow-tag" id="period-year-tag">CONECTANDO…</span></div>
+        <h1 id="page-title">Cuenta tus horas.<br><span>Enfócate en enseñar.</span></h1>
+        <p class="intro-copy">Una cuenta clara de las clases que faltan en el semestre, basada en tu horario y el calendario académico compartido.</p>
+        <div class="intro-facts">
+          <div><span class="fact-icon">01</span><span><b id="subject-count">— materias</b><small id="group-copy">del grupo 932</small></span></div>
+          <div><span class="fact-icon fact-icon-cyan">↗</span><span><b>Calendario</b><small id="intro-period">Periodo activo</small></span></div>
+        </div>
+        <div class="intro-actions">
+          <button class="button data-query-trigger" id="open-api-data" type="button" aria-haspopup="dialog" aria-controls="api-data-dialog">
+            <span class="data-query-trigger-icon" aria-hidden="true">▤</span>
+            <span>Consultar datos del grupo</span>
+            <span class="data-query-trigger-arrow" aria-hidden="true">↗</span>
+          </button>
+          <span class="data-query-caption">Horario y calendario · Solo lectura</span>
+        </div>
+      </section>
+
+      <aside class="brand-panel" id="brand-panel" aria-label="Marca y grupo 932">
+        <div class="panel-brand-row">
+          <a class="brand" href="/" aria-label="Horas 932, inicio">
+            <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
+            <span class="brand-copy"><strong>horas<span>932</span></strong><small>ASISTENTE ACADÉMICO</small></span>
+          </a>
+          <div class="panel-meta" id="brand-meta" aria-label="Periodo activo, grupo 932">
+            <span class="live-dot" aria-hidden="true"></span>
+            <div class="panel-meta-item"><small>PERIODO</small><strong id="period-value">—</strong></div>
+            <i aria-hidden="true"></i>
+            <div class="panel-meta-item"><small>GRUPO</small><strong id="group-value">932</strong></div>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="work-area" aria-label="Calculadora de horas pendientes">
+      <div class="wizard-card">
+        <div class="card-topline"><span class="card-label"><span class="sparkle">✳</span> TU CÁLCULO</span><span id="step-count" class="step-count">CARGANDO DATOS</span></div>
+        <div class="progress-track" id="progress-track" role="progressbar" aria-label="Progreso del cálculo" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="progress-fill"></span></div>
+        <div class="stepper" id="step-steps" role="list" aria-label="Pasos del cálculo"></div>
+        <div id="wizard" aria-live="polite" aria-atomic="false"></div>
+        <div class="card-footer"><span class="lock-mark" aria-hidden="true">◈</span><span>Tus respuestas de cálculo no se guardan.</span><span class="footer-right">API DE SOLO LECTURA</span></div>
+      </div>
+
+      <aside class="side-panel" aria-label="Información del cálculo">
+        <div class="side-heading"><span class="side-orbit">◎</span><div><small>DATOS DEL PERIODO</small><h2>Tu semestre, en contexto.</h2></div></div>
+        <div class="timeline">
+          <div class="timeline-item"><span class="timeline-dot cyan"></span><div><small>CLASES REGULARES</small><strong id="regular-date">Cargando…</strong><p>Cuenta sesiones hábiles según tu horario.</p></div></div>
+          <div class="timeline-item"><span class="timeline-dot amber"></span><div><small>FECHAS ADICIONALES</small><strong id="additional-range">Cargando…</strong><p>Se muestran aparte, como margen adicional.</p></div></div>
+          <div class="timeline-item calendar-details-item"><span class="timeline-dot violet" aria-hidden="true"></span><details class="calendar-details"><summary><small>EXCLUSIONES</small><strong class="calendar-details-heading">Suspensiones y exámenes</strong><span class="calendar-details-toggle">Ver fechas <span aria-hidden="true">⌄</span></span></summary><div class="calendar-details-body"><ul id="calendar-exclusion-list"><li>Cargando calendario…</li></ul></div></details></div>
+        </div>
+        <div class="side-note"><span class="note-symbol">i</span><p>El cálculo inicia <b>mañana</b> y cuenta solo de lunes a viernes.</p></div>
+        <div class="side-signature"><span class="signature-line"></span> HECHO PARA EL AULA</div>
+      </aside>
+    </section>
+
+    <footer class="page-footer"><span>HORAS 932 <i>·</i> HERRAMIENTA DE APOYO DOCENTE</span><span>UABC <b id="footer-year">—</b></span></footer>
+  </main>
+  <dialog class="api-data-dialog" id="api-data-dialog" aria-labelledby="api-data-title" aria-describedby="api-data-description">
+    <div class="api-data-shell">
+      <header class="api-data-header">
+        <div>
+          <span class="api-data-kicker">CONSULTA DIRECTA · SOLO LECTURA</span>
+          <h2 id="api-data-title">Datos académicos del grupo</h2>
+          <p id="api-data-context">Consulta las materias y el calendario vigentes.</p>
+        </div>
+        <button class="api-dialog-close" id="close-api-data" type="button" aria-label="Cerrar consulta">×</button>
+      </header>
+      <div class="api-data-toolbar">
+        <span class="api-source-chip"><span class="live-dot" aria-hidden="true"></span> API FastAPI · MySQL</span>
+        <div class="api-data-toolbar-actions">
+          <time id="api-data-updated">Sin consultar</time>
+          <button class="button button-primary api-refresh-button" id="refresh-api-data" type="button">Actualizar datos <span aria-hidden="true">↻</span></button>
+        </div>
+      </div>
+      <p class="api-data-description" id="api-data-description">La información se consulta en vivo y no se puede editar aquí. Endpoint: <code>GET /api/v1/horario?grupo=932</code>.</p>
+      <a class="api-json-link" href="/api/v1/horario?grupo=932" target="_blank" rel="noopener">Abrir respuesta JSON del API <span aria-hidden="true">↗</span></a>
+      <div class="api-data-status" id="api-data-status" role="status" aria-live="polite" hidden></div>
+      <section class="api-data-content" id="api-data-content" aria-label="Datos consultados" hidden>
+        <div class="api-section-heading">
+          <div><span>HORARIO COMPARTIDO</span><h3>Horas por materia</h3></div>
+          <span class="api-period-badge" id="api-data-period">Periodo activo</span>
+        </div>
+        <div class="api-table-scroll" role="region" aria-label="Tabla de horas semanales por materia" tabindex="0">
+          <table class="api-data-table">
+            <caption>Horas de clase por día y total semanal.</caption>
+            <thead><tr><th scope="col">Materia</th><th scope="col">Lunes</th><th scope="col">Martes</th><th scope="col">Miércoles</th><th scope="col">Jueves</th><th scope="col">Viernes</th><th scope="col">Total</th></tr></thead>
+            <tbody id="api-subject-rows"></tbody>
+            <tfoot><tr><th scope="row">Total del grupo</th><td id="api-total-lunes">—</td><td id="api-total-martes">—</td><td id="api-total-miercoles">—</td><td id="api-total-jueves">—</td><td id="api-total-viernes">—</td><td id="api-total-semana">—</td></tr></tfoot>
+          </table>
+        </div>
+        <div class="api-calendar-block">
+          <div class="api-section-heading api-calendar-heading"><div><span>CALENDARIO OFICIAL</span><h3>Fechas del periodo</h3></div></div>
+          <div class="api-calendar-metrics">
+            <article><small>Fin de clases regulares</small><strong id="api-regular-end">—</strong></article>
+            <article><small>Fechas adicionales</small><strong id="api-extra-dates">—</strong></article>
+            <article><small>Último día considerado</small><strong id="api-final-date">—</strong></article>
+          </div>
+          <div class="api-exclusions-card"><h4>Suspensiones y exámenes descontados</h4><ul id="api-exclusion-list"></ul></div>
+        </div>
+      </section>
+      <p class="api-data-footnote">Vista de consulta: no modifica MySQL ni guarda las respuestas de los cálculos.</p>
+    </div>
+  </dialog>
+</body>
+</html>
