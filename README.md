@@ -4,14 +4,14 @@ La aplicación consulta un solo horario y calendario compartidos para el grupo 9
 
 ## Stack
 
-- **Frontend:** HTML semántico, CSS responsive y JavaScript sin framework en `public/`.
-- **Backend web publicado:** Python 3.12 con FastAPI y Uvicorn ASGI (`main.py`). PyMySQL conecta el servidor con la base gestionada.
+- **Frontend:** HTML semántico, CSS responsive y JavaScript sin framework en `Frontend/`.
+- **Backend web publicado:** Python 3.12 con FastAPI y Uvicorn ASGI (`main.py` (raíz)). PyMySQL conecta el servidor con la base gestionada.
 - **API:** JSON de solo lectura en `/api/v1/horario` y estado del servicio/base en `/api/health`.
-- **Base de datos oficial:** MySQL administrado por Webdev. MySQL es un servicio remoto, no el archivo `materias_932.db`. `DATABASE_URL` solo se lee en el servidor; no aparece en el navegador ni en el paquete local. La conexión usa TLS y verifica el certificado del servidor.
-- **Base local:** `materias_932.db` es SQLite, un archivo distinto que Python actualiza desde el API. Conserva la tabla `materias_932` y agrega `calendario_932` y `horario_cache` para fechas, periodo y hora de sincronización.
+- **Base de datos oficial:** MySQL administrado por Webdev. MySQL es un servicio remoto, no el archivo `Base de datos/materias_932.db`. `DATABASE_URL` solo se lee en el servidor; no aparece en el navegador ni en el paquete local. La conexión usa TLS y verifica el certificado del servidor.
+- **Base local:** `Base de datos/materias_932.db` es SQLite, un archivo distinto que Python actualiza desde el API. Conserva la tabla `materias_932` y agrega `calendario_932` y `horario_cache` para fechas, periodo y hora de sincronización.
 - **Programa local:** Python 3 y `urllib` estándar consultan el mismo API por HTTPS. No requiere credenciales ni dependencias de MySQL.
-- **Build/publicación:** Node/npm se usa únicamente para copiar y construir los archivos estáticos de `public/` en `dist/`; el backend web objetivo no es Node.
-- **Rutas Webdev:** el mapa gestionado enruta `/api/*` al contenedor Python y `/*` al sitio estático; `public/manus-routes.json` declara las páginas del sitio (solo `/`), no las rutas API.
+- **Build/publicación:** Node/npm se usa únicamente para copiar y construir los archivos estáticos de `Frontend/` en `dist/`; el backend web objetivo no es Node.
+- **Rutas Webdev:** el mapa gestionado enruta `/api/*` al contenedor Python y `/*` al sitio estático; `Frontend/manus-routes.json` declara las páginas del sitio (solo `/`), no las rutas API.
 
 ## Flujo de datos
 
@@ -25,7 +25,7 @@ La caché SQLite es un respaldo del cliente local; no es el origen oficial de la
 
 ## Datos compartidos
 
-Las migraciones versionadas están en `db/migrations/`. FastAPI las revisa al iniciar y reutiliza el historial MySQL `horas932_migrations` con el bloqueo `GET_LOCK`; la migración inicial ya aplicada no se repite. El backend no restablece el esquema ni duplica las materias.
+Las migraciones versionadas están en `Base de datos/`. FastAPI las revisa al iniciar y reutiliza el historial MySQL `horas932_migrations` con el bloqueo `GET_LOCK`; la migración inicial ya aplicada no se repite. El backend no restablece el esquema ni duplica las materias.
 
 La API es de solo lectura. Para cambiar horarios, calendario o semestre se prepara y revisa una nueva migración SQL versionada. Para activar otro periodo, esa migración añade periodo, materias y calendario, deja el periodo anterior inactivo y activa el nuevo. No hay panel público ni endpoint para escribir horarios.
 
@@ -33,13 +33,13 @@ El servicio MySQL de Preview y producción es el mismo. Las respuestas de MySQL 
 
 ## Ejecutar el programa Python local
 
-Mantén `calcular_horas_932.py` y `materias_932.db` juntos. Python 3 no requiere instalar paquetes:
+El algoritmo está en `backend/calcular_horas_932.py` y la copia SQLite en `Base de datos/materias_932.db`. Python 3 no requiere instalar paquetes:
 
 ```bash
-python calcular_horas_932.py
+python backend/calcular_horas_932.py
 ```
 
-En Windows también puedes usar `py calcular_horas_932.py`. Este paquete está fijado al grupo 932. La URL del API puede cambiarse con `HORAS932_API_BASE_URL`; `HORAS932_PERIODO` solicita un periodo específico. Sin esa variable, se consulta el periodo activo. El backend FastAPI ya está publicado en https://horas932-3rxpt5kn.manus.space y ofrece el mismo contrato JSON que consume el programa local.
+En Windows también puedes usar `py backend/calcular_horas_932.py`. Este paquete está fijado al grupo 932. La URL del API puede cambiarse con `HORAS932_API_BASE_URL`; `HORAS932_PERIODO` solicita un periodo específico. Sin esa variable, se consulta el periodo activo. El backend FastAPI ya está publicado en https://horas932-3rxpt5kn.manus.space y ofrece el mismo contrato JSON que consume el programa local.
 
 Para probar contra el Preview local, usa `HORAS932_API_BASE_URL=http://localhost:3000`. No copies `DATABASE_URL` al programa, a un archivo compartido ni a SQLite.
 

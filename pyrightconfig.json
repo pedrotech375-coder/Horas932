@@ -1,5 +1,5 @@
 {
-  "include": ["main.py", "db", "tools", "tests"],
+  "include": ["main.py", "db", "backend", "tests"],
   "extraPaths": ["."],
   "exclude": [".venv", "dist", "node_modules"],
   "pythonVersion": "3.12",

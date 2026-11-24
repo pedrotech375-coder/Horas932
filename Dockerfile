@@ -13,7 +13,9 @@ RUN python -m pip install --no-cache-dir -r requirements.lock
 
 COPY main.py ./main.py
 COPY db ./db
-COPY public ./public
+COPY Frontend ./Frontend
+COPY ["Base de datos", "./Base de datos"]
+COPY backend ./backend
 
 RUN groupadd --system app \
     && useradd --system --gid app --home-dir /app app \

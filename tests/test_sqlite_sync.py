@@ -5,11 +5,11 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from tools import calcular_horas_932 as client
+from backend import calcular_horas_932 as client
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-BASE_DATABASE = PROJECT_ROOT / "tools" / "materias_932.db"
+BASE_DATABASE = PROJECT_ROOT / "Base de datos" / "materias_932.db"
 PAYLOAD = {
     "periodo": "2026-2",
     "grupo": 932,

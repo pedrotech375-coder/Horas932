@@ -16,7 +16,7 @@ from urllib.error import HTTPError, URLError
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 
-DB = Path(os.getenv("HORAS932_SQLITE_PATH", str(Path(__file__).with_name("materias_932.db"))))
+DB = Path(os.getenv("HORAS932_SQLITE_PATH", str(Path(__file__).resolve().parents[1] / "Base de datos" / "materias_932.db")))
 API_BASE_URL = os.getenv("HORAS932_API_BASE_URL", "https://horas932-3rxpt5kn.manus.space").rstrip("/")
 GRUPO = "932"
 PERIODO_SOLICITADO = os.getenv("HORAS932_PERIODO", "").strip()
